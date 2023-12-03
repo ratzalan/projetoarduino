@@ -1,5 +1,5 @@
 Disciplina Objetos Inteligentes Conectados 
 
-Detector de Objetos
+Detector de distancia de Objetos
 
 Código deve ser executado na IDE arduino

@@ -1,0 +1,55 @@
+//PROJETO ARDUINO - ALAN ARAUJO RATZ - TIA: 10921515638
+//SENSOR PRESENCA, ALERTA SONORO E VISUAL
+
+int PinoGatilho = 8;
+int PinoEco = 11;
+int PinoSOM = 10; 
+int time;
+int VarDistancia; 
+int PinoVerde = 3;
+int PinoVermelho = 4;
+
+
+void setup ( ) {
+
+        Serial.begin (9600); 
+        pinMode (PinoGatilho, OUTPUT); 
+        pinMode (PinoEco, INPUT);
+        pinMode (PinoSOM, OUTPUT);
+        pinMode (PinoVerde,OUTPUT);
+        pinMode (PinoVermelho, OUTPUT);
+}
+
+
+void loop ( ) {
+  
+    digitalWrite (PinoGatilho, HIGH);
+    delayMicroseconds (10);
+    digitalWrite (PinoGatilho, LOW);
+    time = pulseIn (PinoEco, HIGH);
+    digitalWrite(PinoVerde, LOW);
+    digitalWrite(PinoVermelho, LOW);
+    
+    VarDistancia = (time * 0.034) / 2;
+
+  if (VarDistancia <= 50) 
+
+        {
+        Serial.println ("SISTEMA DESLIGADO");
+        Serial.print ("Distancia=");              
+        Serial.println (VarDistancia);        
+        digitalWrite (PinoSOM, HIGH);
+        digitalWrite (PinoVermelho, HIGH);
+        delay (500);
+        }
+
+  else {
+
+        Serial.println ("SISTEMA LIGADO");
+        Serial.print ("Distancia= ");              
+        Serial.println (VarDistancia);        
+        digitalWrite (PinoSOM, LOW);
+        digitalWrite (PinoVerde, HIGH);
+        delay (500);        
+  } 
+}
